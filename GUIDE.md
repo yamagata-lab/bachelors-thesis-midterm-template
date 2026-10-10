@@ -16,6 +16,7 @@ bachelors-thesis-yyyy-firstname-familyname/
     ├── main.tex          # 予稿の本文
     ├── main.pdf          # 生成した予稿PDF
     ├── .latexmkrc
+    ├── platexmkrc        # TeXShop用の設定
     └── figures/          # 図
         └── .gitkeep
 ```
@@ -45,7 +46,7 @@ bachelors-thesis-yyyy-firstname-familyname/
   - macOS：[MacTeX](https://tug.org/mactex/mactex-download.html)の`MacTeX.pkg`をインストール
   - Linux：[TeX Live](https://tug.org/texlive/quickinstall.html)をフルインストールし、案内に従ってPATHを設定
   - LuaLaTeX・latexmk・日本語パッケージを含む構成を使用
-- エディター：[Visual Studio Code](https://code.visualstudio.com/download)など
+- エディター：TeXShop（macOS・MacTeXに付属）、[Visual Studio Code](https://code.visualstudio.com/download)など
 - PDFビューアー：ブラウザーやOS標準のもので可
 
 ### 1. インストールの確認とGitHubへのログイン
@@ -122,26 +123,21 @@ gh api --method PUT "repos/{owner}/{repo}/collaborators/yoriyuki-fukui" -f permi
 
 ### 4. PDFの作成
 
-編集したファイルを保存し、先ほどのターミナルで実行します。
+**TeXShop（macOS）**
+
+`midterm/main.tex`をTeXShopで開き、`⌘T`（タイプセット）を押します。
+保存・LuaLaTeXでのPDF生成・プレビュー更新まで実行されます。通常のMacTeX／TeXShop環境では追加設定は不要です。
+
+**ターミナル（Windows・macOS・Linux共通）**
+
+編集したファイルを保存し、リポジトリ直下または`midterm/`で実行します。
 
 ```sh
 latexmk -pdf
 ```
 
 `midterm/main.pdf`を開き、氏名・タイトルと、2ページであることを確認します。
-エラーが出た場合は修正して再実行してください。
-
-**保存時に自動更新する場合**
-
-代わりに次を実行します。
-
-```sh
-latexmk -pdf -pvc
-```
-
-ターミナルを開いたまま編集すると、保存するたびにPDFが再生成されます。
-次の手順へ進むときは、ターミナルで`Ctrl+C`を押して終了してください。
-開いているPDF表示の自動更新は、PDFビューアーの対応によります。
+エラーが出た場合は修正し、もう一度`⌘T`または上のコマンドを実行してください。
 
 ### 5. 変更を保存・送信（first commit）
 

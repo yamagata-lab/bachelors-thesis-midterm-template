@@ -1,0 +1,2 @@
+# TeXShop: reuse the LuaLaTeX settings from .latexmkrc.
+do './.latexmkrc' or die "Cannot load .latexmkrc: $@ $!";

@@ -25,10 +25,10 @@ bachelors-thesis-yyyy-firstname-familyname/
 
 | 項目 | 設定 |
 | --- | --- |
-| Owner | 自分のGitHubアカウント |
+| Owner | `yamagata-lab` |
 | リポジトリ名 | `bachelors-thesis-yyyy-firstname-familyname` |
 | 公開範囲 | Private |
-| Collaborator | `yoriyuki-fukui` |
+| 先生の編集権限 | `yoriyuki-fukui` にWrite以上 |
 
 - `yyyy`：対象年度（西暦4桁）
 - `firstname-familyname`：名・姓のローマ字（小文字）
@@ -38,6 +38,7 @@ bachelors-thesis-yyyy-firstname-familyname/
 **必要な環境** （以下を用意，インストールしてください）
 
 - [GitHubアカウント](https://github.com/signup)
+- `yamagata-lab`への参加とPrivateリポジトリの作成権限（未参加・権限がない場合は先生に依頼）
 - [Git](https://git-scm.com/install/)：ファイルの変更履歴を管理
 - GitHub CLI（`gh`）：ターミナルからGitHubを操作
   - インストール：[Windows](https://github.com/cli/cli/blob/trunk/docs/install_windows.md) / [macOS](https://github.com/cli/cli/blob/trunk/docs/install_macos.md) / [Linux](https://github.com/cli/cli/blob/trunk/docs/install_linux.md)
@@ -68,7 +69,7 @@ gh auth login --hostname github.com --git-protocol https --web
 gh auth setup-git --hostname github.com
 ```
 
-### 2. 自分のリポジトリを作成（initial commit）
+### 2. yamagata-labにリポジトリを作成（initial commit）
 
 `保存先フォルダーのパス`を、自分のPCにある保存先のパスに置き換えます。
 
@@ -79,20 +80,21 @@ cd "保存先フォルダーのパス"
 次の2行の`yyyy-firstname-familyname`を自分の年度・名前に置き換えて実行します。
 
 ```sh
-gh repo create bachelors-thesis-yyyy-firstname-familyname --private --template yamagata-lab/bachelors-thesis-midterm-template --clone
+gh repo create yamagata-lab/bachelors-thesis-yyyy-firstname-familyname --private --template yamagata-lab/bachelors-thesis-midterm-template --clone
 cd bachelors-thesis-yyyy-firstname-familyname
 ```
 
-自分のアカウントにPrivateリポジトリが作られ、同名のフォルダーがPCにできます。
+`yamagata-lab`内に自分の研究用のPrivateリポジトリが作られ、PCには`bachelors-thesis-yyyy-firstname-familyname`フォルダーができます。
 テンプレート一式は初回コミット（initial commit）として自動保存されます。
 
-続いて先生を共同編集者に招待します。`{owner}`と`{repo}`はそのままで実行してください。
+先生が組織のOwnerなどとして既に編集できる場合は、追加不要です。
+編集権限がない場合は、次のコマンドで共同編集者に追加します。`{owner}`と`{repo}`はそのままで実行してください。
 
 ```sh
 gh api --method PUT "repos/{owner}/{repo}/collaborators/yoriyuki-fukui" -f permission=push --silent
 ```
 
-先生が招待を承認すると、共同編集できるようになります。
+招待が送られた場合は、先生に承認してもらいます。
 
 ### 3. 氏名・発表情報の設定
 
@@ -157,7 +159,7 @@ git push
 gh repo view --web
 ```
 
-開いたGitHubページで、READMEとPDFが更新されていれば完了です。
+開いたGitHubページで、所有者が`yamagata-lab`、公開範囲がPrivateであることと、README・PDFの更新を確認して完了です。
 
 ## 本文の構成
 
